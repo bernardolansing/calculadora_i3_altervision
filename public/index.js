@@ -1,11 +1,8 @@
 let conceitos = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'FF': 0, 'TRANC': 0};
 
-window.onload = () => {
-	
-	// a página não carregou devidamente
-	if (!document.getElementsByName('input-conceito') || !document.getElementById('botao-limpar')) {
-		window.location.reload();
-	}
+window.onload = async () => {
+	// esperar até que os componentes terminem de carregar
+	await sleep(500);
 
 	// adicionar evento input a cada TextBox
 	for (let textField of document.getElementsByName('input-conceito')) {
@@ -90,4 +87,8 @@ function exibirMedia() {
 	const greenChannel = 100 + media * 15;
 	const redChannel = 180 + (10 - media) * 7;
 	pDisplay.style.color = `rgba(${redChannel}, ${greenChannel}, 0)`;
+}
+
+async function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
 }
